@@ -6,5 +6,5 @@ module.exports = {
     standardHeaders: true,
     legacyHeaders: false,
   },
-  mongodbUrl: 'mongodb://127.0.0.1:27017/bitfilmsdb',
+  mongodbUrl: process.env.NODE_ENV === 'production' ? process.env.DB_URL : 'mongodb://127.0.0.1:27017/bitfilmsdb',
 };

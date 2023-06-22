@@ -80,7 +80,9 @@ const updateUser = (req, res, next) => {
     }
     res.send(user);
   }).catch((err) => {
-    if (err.name === 'ValidationError') {
+    if (err.code === 11000) {
+      next(new ConflictError('Пользователь с таким email уже зарегистрирован'));
+    } else if (err.name === 'ValidationError') {
       next(new BadRequestError(`Некорректные данные пользователя: ${err.message}`));
     } else {
       next(err);
